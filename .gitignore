@@ -1,1 +1,4 @@
 nfl-big-data-bowl-2026-prediction/*
+.venv/
+__pycache__/
+.ipynb_checkpoints/
