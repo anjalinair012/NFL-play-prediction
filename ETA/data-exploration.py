@@ -10,5 +10,3 @@ print(df.nunique())
 print("summary statistics for each column:")
 print(df.describe())
 
-
-#

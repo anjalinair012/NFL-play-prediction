@@ -97,6 +97,8 @@ def get_play(inp, out, game_id=None, play_id=None, normalize_dir=True, seed=None
         "game_id": game_id,
         "play_id": play_id,
         "track": track,
+        "normalized": normalize_dir,
+        "play_direction": play_info.play_direction.iloc[0],
         "throw_frame": last_in,
         "ball_land": (play_info.ball_land_x.iloc[0], play_info.ball_land_y.iloc[0]),
     }
@@ -135,9 +137,11 @@ def _zoom(ax, track, min_span=50):
     ax.set_xlim(lo, hi)
 
 
-def _title(play, normalize_dir=True):
+def _title(play):
     t = f"Game {play['game_id']}  Play {play['play_id']}"
-    return t + ("  (normalized: offense -> right)" if normalize_dir else "")
+    if play.get("normalized", True):
+        return t + "  (normalized: offense -> right)"
+    return t + f"  (raw, play_direction={play.get('play_direction', '?')})"
 
 
 # ---------------------------------------------------------------- static plot
